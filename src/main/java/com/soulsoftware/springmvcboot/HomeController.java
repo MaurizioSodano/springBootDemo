@@ -13,6 +13,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 public class HomeController {
 
+    @ModelAttribute
+    public void modelData(Model m){
+        m.addAttribute("name","Aliens");
+    }
     @RequestMapping("/")
     public String home(){
 
