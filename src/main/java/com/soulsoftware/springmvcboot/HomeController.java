@@ -40,7 +40,7 @@ public class HomeController {
     @PostMapping("addAlien")
     public String addAlien(@ModelAttribute("alien") Alien a) {
 
-
+        repo.save(a);
         return "result";
     }
 
@@ -48,6 +48,12 @@ public class HomeController {
     public String getAliens(Model m) {
        // List<Alien> aliens= Arrays.asList(new Alien(101,"Pippo"),new Alien(200,"Pluto"));
         m.addAttribute("result",repo.findAll());
+        return "showAliens";
+    }
+
+    @GetMapping("getAlien")
+    public String getAlien(@RequestParam int aid,Model m){
+        m.addAttribute("result",repo.findById(aid));
         return "showAliens";
     }
 
