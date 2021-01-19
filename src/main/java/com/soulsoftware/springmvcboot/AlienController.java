@@ -4,10 +4,7 @@ import com.soulsoftware.springmvcboot.model.Alien;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -17,7 +14,7 @@ public class AlienController {
     AlienRepo repo;
 
     @GetMapping("aliens")
-    public List<Alien> getAliens(Model m) {
+    public List<Alien> getAliens() {
         // List<Alien> aliens= Arrays.asList(new Alien(101,"Pippo"),new Alien(200,"Pluto"));
         List<Alien> aliens = repo.findAll();
 
@@ -29,4 +26,11 @@ public class AlienController {
         Alien alien = repo.findById(aid).orElse(new Alien(0, ""));
         return alien;
     }
+
+    @PostMapping("alien")
+    public Alien addAlien(Alien alien) {
+        repo.save(alien);
+        return alien;
+    }
+
 }
